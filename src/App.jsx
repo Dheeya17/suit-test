@@ -115,17 +115,17 @@ function App() {
           className="transition-all ease-in-out flex overflow-x-hidden mb-8 duration-300 h-full"
           ref={ref}
         >
-          <div className="flex">
+          <div className="flex w-full">
             {crosel.map((el, index) => {
               return (
                 <div
-                  className={`transition-all flex-none ${
+                  className={`transition-all w-full flex-none ${
                     pages == 0 ? "" : "-translate-x-full"
                   } duration-300`}
                 >
                   <img src={el.url} alt="" />
                   {pages == index && (
-                    <div className="absolute text-white bottom-32 left-48 text-2xl uppercase font-bold bg-black p-4 pr-7 bg-opacity-50 w-1/2 text-left">
+                    <div className="absolute text-white bottom-32 left-48 text-md md:text-xl lg:text-2xl uppercase font-bold bg-black p-4 pr-7 bg-opacity-50 w-1/2 text-left">
                       <h3>{el.capt}</h3>
                     </div>
                   )}
@@ -146,12 +146,11 @@ function App() {
           </div>
         </div>
       </div>
-
       <div>
         <h2 className="uppercase text-2xl font-bold my-4 mt-20">Our Values</h2>
-        <div className="flex flex-row justify-center space-x-4">
-          <div className="w-0 h-0 border-t-transparent border-b-transparent border-l-8 border-l-red-600"></div>
-          <div className="bg-red-400 text-white p-8 w-72 border-2 border-red-600">
+
+        <div className="flex flex-col items-center md:flex-row lg:flex-row justify-center lg:space-x-4">
+          <div className="bg-red-400 mb-4 text-white p-8 w-72 border-2 border-red-600">
             <img className="mx-auto h-6" src="/lightbulb-o.png" alt="" />
             <h2 className="uppercase font-bold my-3">Innovative</h2>
             <p className="text-sm">
@@ -159,7 +158,7 @@ function App() {
               similique eurn itaque facere temporibus dolores
             </p>
           </div>
-          <div className=" bg-emerald-400 text-white p-8 w-72 border-2 border-teal-600">
+          <div className=" bg-emerald-400 mb-4 text-white p-8 w-72 border-2 border-teal-600">
             <img className="mx-auto h-6" src="/bank.png" alt="" />
             <h2 className="uppercase font-bold my-3">Loyalty</h2>
             <p className="text-sm">
@@ -167,7 +166,7 @@ function App() {
               similique eurn itaque facere temporibus dolores
             </p>
           </div>
-          <div className="bg-blue-500 text-white p-8 w-72 border-2 border-blue-700">
+          <div className="bg-blue-500 mb-4 text-white p-8 w-72 border-2 border-blue-700">
             <img className="mx-auto h-6" src="/balance-scale.png" alt="" />
             <h2 className="uppercase font-bold my-3">Respect</h2>
             <p className="text-sm">
