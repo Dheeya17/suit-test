@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useState } from "react";
 import "./App.css";
 
@@ -7,7 +8,6 @@ function App() {
     setValemail(true);
     setValmessage(true);
   }
-  const require = { required: true, invalid: true, errorMessage: "hiyaa" };
 
   const [name, setName] = useState();
   const [valname, setValname] = useState(false);
@@ -16,26 +16,33 @@ function App() {
   const [message, setMessage] = useState();
   const [valmessage, setValmessage] = useState();
   const [pages, setPages] = useState(0);
-
+  const ref = useRef(null);
   const crosel = [
     {
       url: "/bg.jpg",
       capt: "This is a place where technology & creativity fused into digital chemistry",
+      id: 0,
     },
     {
       url: "/about-bg.jpg",
       capt: "We don't have the best but we have the greatest team",
+      id: 1,
     },
   ];
 
+  const slider = (slideval) => {
+    ref.current.scrollLeft += slideval;
+  };
+  console.log(pages);
+  const last = pages;
   const prev = () => {
     const first = pages === 0;
     const move = first ? crosel.length - 1 : pages - 1;
     setPages(move);
   };
   const next = () => {
-    const last = pages === crosel.length - 1;
-    const move = last ? 0 : pages + 1;
+    const end = pages === crosel.length - 1;
+    const move = end ? 0 : pages + 1;
     setPages(move);
   };
   const jump = (move) => {
@@ -104,35 +111,27 @@ function App() {
         >
           <img src="https://img.icons8.com/ios/50/FFFFFF/circled-chevron-left.png" />
         </div>
-        {/* <div className="transition-all flex overflow-x-hidden mb-8 justify-start duration-300">
-          <div className="flex-none">
-            <img className="" src="/bg.jpg" alt="" />
-          </div>
-          <div className="flex-none">
-            <img className="" src="/about-bg.jpg" alt="" />
-          </div>
-        </div> */}
-        <div className="overflow-x-hidden relative w-full">
-          <div className="flex transition-all h-full relative duration-300">
-            {/* <div className="relative">
-              <img className="w-full h-full" src="/bg.jpg" alt="" />
-              <div className="absolute text-white bottom-32 left-48 text-2xl uppercase font-bold bg-black p-4 pr-7 bg-opacity-50 w-1/2 text-left">
-                <h3>
-                  This is a place where technology & creativity fused into
-                  digital chemistry
-                </h3>
-              </div>
-            </div>
-            <div className="relative">
-              <img className="w-full h-full" src="about-bg.jpg" alt="" />
-              <div className="absolute text-white bottom-32 left-48 text-2xl uppercase font-bold bg-black p-4 pr-7 bg-opacity-50 w-1/2 text-left">
-                <h3>We don't have the best but we have the greatest team</h3>
-              </div>
-            </div> */}
-            <img src={crosel[pages].url} alt="" />
-            <div className="absolute text-white bottom-32 left-48 text-2xl uppercase font-bold bg-black p-4 pr-7 bg-opacity-50 w-1/2 text-left">
-              <h3>{crosel[pages].capt}</h3>
-            </div>
+        <div
+          className="transition-all ease-in-out flex overflow-x-hidden mb-8 duration-300 h-full"
+          ref={ref}
+        >
+          <div className="flex">
+            {crosel.map((el, index) => {
+              return (
+                <div
+                  className={`transition-all flex-none ${
+                    pages == 0 ? "" : "-translate-x-full"
+                  } duration-300`}
+                >
+                  <img src={el.url} alt="" />
+                  {pages == index && (
+                    <div className="absolute text-white bottom-32 left-48 text-2xl uppercase font-bold bg-black p-4 pr-7 bg-opacity-50 w-1/2 text-left">
+                      <h3>{el.capt}</h3>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="absolute right-1/2 bottom-5">
